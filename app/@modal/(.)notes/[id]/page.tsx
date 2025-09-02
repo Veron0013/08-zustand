@@ -9,7 +9,6 @@ type Props = {
 const Page = async ({ params }: Props) => {
 	const { id } = await params
 
-	console.log(id)
 	const queryClient = new QueryClient()
 
 	await queryClient.prefetchQuery({

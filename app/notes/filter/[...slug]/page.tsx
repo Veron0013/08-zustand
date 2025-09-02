@@ -6,6 +6,30 @@ type Props = {
 	params: Promise<{ slug: string[] }>
 }
 
+export async function generateMetadata({ params }: Props) {
+	const { slug } = await params
+	const noteFilter: string = slug[0] || "All notes"
+	return {
+		title: `Notes: ${noteFilter}`,
+		description: `Notes filtered by ${noteFilter}`,
+		openGraph: {
+			title: `Notes: ${noteFilter}`,
+			description: `Notes filter: ${noteFilter}`,
+			url: `https://notehub.com/notes/filter/${noteFilter}`,
+			siteName: "NoteHub",
+			images: [
+				{
+					url: "https://ac.goit.global/fullstack/react/og-meta.jpg",
+					width: 1200,
+					height: 630,
+					alt: noteFilter,
+				},
+			],
+			type: "article",
+		},
+	}
+}
+
 const NotesByCategory = async ({ params }: Props) => {
 	const { slug } = await params
 	const queryClient = new QueryClient()
