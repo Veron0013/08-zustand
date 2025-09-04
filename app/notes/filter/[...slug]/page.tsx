@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: Props) {
 		openGraph: {
 			title: `Notes: ${noteFilter}`,
 			description: `Notes filter: ${noteFilter}`,
-			url: `https://notehub.com/notes/filter/${noteFilter}`,
+			url: `https://08-zustand-eight-rouge.vercel.app/notes/filter/${noteFilter}`,
 			siteName: "NoteHub",
 			images: [
 				{
