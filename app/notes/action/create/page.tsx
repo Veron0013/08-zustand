@@ -8,10 +8,10 @@ export const dynamic = "force-dynamic"
 export async function generateMetadata() {
 	return {
 		title: `Note: create new note`,
-		description: "new note creation",
+		description: "New note creation data",
 		openGraph: {
 			title: `Note: create new note`,
-			description: "new note creation",
+			description: "New note creation data",
 			url: `https://08-zustand-eight-rouge.vercel.app/notes/action/create`,
 			siteName: "NoteHub",
 			images: [

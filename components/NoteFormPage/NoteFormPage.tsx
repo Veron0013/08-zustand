@@ -9,7 +9,7 @@ import type { NotePost } from "@/types/note"
 import { createNote } from "@/lib/api"
 import toastMessage, { MyToastType } from "@/lib/messageService"
 import { useRouter } from "next/navigation"
-import { useTaskStore } from "@/lib/store/taskStore"
+import { useTaskStore } from "@/lib/store/noteStore"
 
 //interface NoteFormProps {
 //	noteObject: Note | null

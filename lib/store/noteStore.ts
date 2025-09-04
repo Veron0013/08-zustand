@@ -2,15 +2,15 @@ import { Tag } from "@/types/note"
 import { create } from "zustand"
 import { persist } from "zustand/middleware"
 
-type TaskValues = {
+type NoteValues = {
 	title: string
 	content: string
 	tag: Tag
 }
 
-type TaskStore = {
-	draft: TaskValues
-	setDraft: (field: keyof TaskValues, value: string) => void
+type NoteStore = {
+	draft: NoteValues
+	setDraft: (field: keyof NoteValues, value: string) => void
 	clearText: () => void
 }
 
@@ -20,7 +20,7 @@ const initialDraft = {
 	tag: "Todo" as Tag,
 }
 
-export const useTaskStore = create<TaskStore>()(
+export const useTaskStore = create<NoteStore>()(
 	persist(
 		(set) => ({
 			draft: initialDraft,
