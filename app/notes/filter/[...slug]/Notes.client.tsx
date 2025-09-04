@@ -56,11 +56,6 @@ const NotesClient = ({ tag }: Props) => {
 		setCurrentPage(1)
 	}, 300)
 
-	//const handleCreateNote = () => {
-	//	setNoteObject(null)
-	//	setIsModalOpen(true)
-	//}
-
 	const handleNoteClick = (noteObjectOut: Note) => {
 		setNoteObject(noteObjectOut)
 		openModal()
@@ -82,13 +77,10 @@ const NotesClient = ({ tag }: Props) => {
 						}}
 					/>
 				)}
-				{/*<button className={css.button} onClick={handleCreateNote}>*/}
 				<button className={css.button} onClick={() => router.push("/notes/action/create/")}>
 					Create note +
 				</button>
 			</header>
-			{/*{isError && <ErrorMessage />}
-			{isLoading && <Loader />}*/}
 			{data && data?.notes?.length > 0 && <NoteList notes={data.notes} onSelect={handleNoteClick} tag={tag} />}
 			{isModalOpen && (
 				<Modal onClose={closeModal}>

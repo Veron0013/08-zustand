@@ -8,12 +8,12 @@ import Loading from "@/app/loading"
 import Error from "@/app/error"
 import ModalNote from "@/components/ModalNote/ModalNote"
 
-type NotePreviewProps = {
-	Noteid: string
-}
+//type NotePreviewProps = {
+//	Noteid: string
+//}
 
-const NotePreviewClient = ({ Noteid }: NotePreviewProps) => {
-	//const NotePreviewClient = () => {
+//const NotePreviewClient = ({ Noteid }: NotePreviewProps) => {
+const NotePreviewClient = () => {
 	const { id } = useParams<{ id: string }>()
 
 	const searchParams = useSearchParams()
