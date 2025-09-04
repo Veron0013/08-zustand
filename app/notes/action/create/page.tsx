@@ -16,7 +16,7 @@ export async function generateMetadata() {
 			siteName: "NoteHub",
 			images: [
 				{
-					url: "https://ac.goit.global/fullstack/react/og-meta.jpg",
+					url: "https://blues.com/wp-content/uploads/2023/02/notehub-js.webp",
 					width: 1200,
 					height: 630,
 					alt: "Note: create new note",
