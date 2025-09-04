@@ -12,6 +12,7 @@ import Pagination from "@/components/Pagination/Pagination"
 import NoteList from "@/components/NoteList/NoteList"
 import Modal from "@/components/Modal/Modal"
 import NoteForm from "@/components/NoteForm/NoteForm"
+import { useRouter } from "next/navigation"
 
 type Props = {
 	tag: string
@@ -25,6 +26,7 @@ const NotesClient = ({ tag }: Props) => {
 
 	const [isModalOpen, setIsModalOpen] = useState(false)
 	const [noteObject, setNoteObject] = useState<Note | null>(null)
+	const router = useRouter()
 
 	const fetchQueryData = async () => {
 		const res: NotesData = await fetchNotes(createQueryParams(notehubQuery, currentPage, tag))
@@ -54,10 +56,10 @@ const NotesClient = ({ tag }: Props) => {
 		setCurrentPage(1)
 	}, 300)
 
-	const handleCreateNote = () => {
-		setNoteObject(null)
-		setIsModalOpen(true)
-	}
+	//const handleCreateNote = () => {
+	//	setNoteObject(null)
+	//	setIsModalOpen(true)
+	//}
 
 	const handleNoteClick = (noteObjectOut: Note) => {
 		setNoteObject(noteObjectOut)
@@ -80,7 +82,8 @@ const NotesClient = ({ tag }: Props) => {
 						}}
 					/>
 				)}
-				<button className={css.button} onClick={handleCreateNote}>
+				{/*<button className={css.button} onClick={handleCreateNote}>*/}
+				<button className={css.button} onClick={() => router.push("/notes/action/create/")}>
 					Create note +
 				</button>
 			</header>
