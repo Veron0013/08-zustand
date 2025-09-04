@@ -1,11 +1,12 @@
 import NoteFormPage from "@/components/NoteFormPage/NoteFormPage"
 import css from "./page.module.css"
+import { Metadata } from "next"
 
 //type Props = {
 //	params: Promise<{ id: string }>
 //}
 export const dynamic = "force-dynamic"
-export async function generateMetadata() {
+export async function generateMetadata(): Promise<Metadata> {
 	return {
 		title: `Note: create new note`,
 		description: "New note creation data",
@@ -27,7 +28,7 @@ export async function generateMetadata() {
 	}
 }
 
-export default function page() {
+export default function Page() {
 	return (
 		<main className={css.main}>
 			<div className={css.container}>

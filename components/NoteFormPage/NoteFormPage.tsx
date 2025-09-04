@@ -5,7 +5,7 @@ import { useId, useState } from "react"
 import css from "./NoteFormPage.module.css"
 //import * as Yup from "yup"
 import { useMutation } from "@tanstack/react-query"
-import type { NotePost } from "@/types/note"
+import type { NotePost, Tag } from "@/types/note"
 import { createNote } from "@/lib/api"
 import toastMessage, { MyToastType } from "@/lib/messageService"
 import { useRouter } from "next/navigation"
@@ -19,7 +19,7 @@ import { useTaskStore } from "@/lib/store/noteStore"
 export default function NoteFormPage() {
 	const fieldId = useId()
 	const router = useRouter()
-	const { draft, setDraft, clearText } = useTaskStore()
+	const { draft, setDraft, resetDraft } = useTaskStore()
 
 	const [status, setStatus] = useState<{ toastText: string; buttonText: string }>({
 		toastText: "created",
@@ -68,8 +68,8 @@ export default function NoteFormPage() {
 				//if (!noteObject) formikHelpers.resetForm() // тільки для створення
 				toastMessage(MyToastType.success, `Note successfully ${status.toastText}`)
 				//queryClient.invalidateQueries({ queryKey: ["notesQuery"] })
-				router.push("/notes/filter/All")
-				clearText()
+				router.back()
+				resetDraft()
 			},
 			onError: (error: Error) => {
 				toastMessage(MyToastType.error, `Note not ${status.toastText}. Error found.${error.message}`)
@@ -89,7 +89,7 @@ export default function NoteFormPage() {
 						placeholder="Enter title. Required"
 						className={css.input}
 						value={draft.title}
-						onChange={(e) => setDraft("title", e.target.value)}
+						onChange={(e) => setDraft({ ...draft, title: e.target.value })}
 					/>
 					{/*<ErrorMessage name="title" component="span" className={css.error} />*/}
 				</div>
@@ -103,7 +103,7 @@ export default function NoteFormPage() {
 						placeholder="Enter main text"
 						className={css.textarea}
 						value={draft.content}
-						onChange={(e) => setDraft("content", e.target.value)}
+						onChange={(e) => setDraft({ ...draft, content: e.target.value })}
 					/>
 					{/*<ErrorMessage name="content" component="span" className={css.error} />*/}
 				</div>
@@ -115,7 +115,7 @@ export default function NoteFormPage() {
 						name="tag"
 						className={css.select}
 						value={draft.tag}
-						onChange={(e) => setDraft("tag", e.target.value)}
+						onChange={(e) => setDraft({ ...draft, tag: e.target.value as Tag })}
 					>
 						<option value="">-- Choose tag --</option>
 						<option value="Todo">Todo</option>
@@ -128,7 +128,7 @@ export default function NoteFormPage() {
 				</div>
 
 				<div className={css.actions}>
-					<button type="button" className={css.cancelButton} onClick={() => router.push("/notes/filter/All")}>
+					<button type="button" className={css.cancelButton} onClick={() => router.back()}>
 						Cancel
 					</button>
 					<button type="submit" className={css.submitButton} disabled={isPending}>

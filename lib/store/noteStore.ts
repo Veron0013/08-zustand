@@ -10,11 +10,11 @@ type NoteValues = {
 
 type NoteStore = {
 	draft: NoteValues
-	setDraft: (field: keyof NoteValues, value: string) => void
-	clearText: () => void
+	setDraft: (newDraft: NoteValues) => void
+	resetDraft: () => void
 }
 
-const initialDraft = {
+const initialDraft: NoteValues = {
 	title: "",
 	content: "",
 	tag: "Todo" as Tag,
@@ -24,20 +24,12 @@ export const useTaskStore = create<NoteStore>()(
 	persist(
 		(set) => ({
 			draft: initialDraft,
-			setDraft: (field, value) =>
-				set((state) => ({
-					draft: {
-						...state.draft,
-						[field]: value,
-					},
-				})),
-			clearText: () =>
-				set({
-					draft: initialDraft,
-				}),
+			setDraft: (newDraft) => set({ draft: newDraft }),
+			resetDraft: () => set({ draft: initialDraft }),
 		}),
 		{
 			name: "task-draft",
+			partialize: (state) => ({ draft: state.draft }), // зберігаємо тільки draft
 		}
 	)
 )
